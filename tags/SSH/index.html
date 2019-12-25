@@ -7,12 +7,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Archives: 2019/11 - Khoa&#39;s blog</title>
+<title>Tag: SSH - Khoa&#39;s blog</title>
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="Khoa&#39;s blog">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;archives&#x2F;2019&#x2F;11&#x2F;index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;SSH&#x2F;index.html">
 <meta property="og:site_name" content="Khoa&#39;s blog">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
@@ -124,37 +124,117 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-
-<div class="card widget">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
     <div class="card-content">
-        <h3 class="tag is-link">
-        November 2019
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-11-03T10:35:01.716Z">2019-11-03</time>
-                        <a href="/2019/11/03/2namnodejs/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Tóm tắt 2 năm sử dụng NodeJS</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/IT/">IT</a> / <a class="has-link-grey -link" href="/categories/IT/Backend/">Backend</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-        </div>
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/tags">Tags</a></li>
+            <li class="is-active"><a href="#" aria-current="page">SSH</a></li>
+        </ul>
+        </nav>
     </div>
 </div>
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-20T23:43:17.594Z">2019-12-21</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/IT/">IT</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/IT/DevOps/">DevOps</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    15 minutes read
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/21/SSHKienthuccobanvaungdung/">SSH - Kiến thức căn bản và ứng dụng</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="Muc-dich-bai-viet"><a href="#Muc-dich-bai-viet" class="headerlink" title="Mục đích bài viết"></a>Mục đích bài viết</h2><p>Trong quá trình đi làm của mình, ngoài việc viết code, một hoạt động khác chiếm khá nhiều thời gian là việc đẩy code lên remote repository, hay deploy code lên server. Khi làm việc với git hay server, chúng ta không thể không nhắc tới thuật ngữ <strong>SSH</strong>. Bài viết này của mình nhằm mục đích hệ thống lại các kiến thức liên quan đến SSH, từ phần kiến thức nền tảng, tới các việc sử dụng SSH trong thực tế.</p>
+<h2 id="Gioi-thieu-SSH"><a href="#Gioi-thieu-SSH" class="headerlink" title="Giới thiệu SSH"></a>Giới thiệu SSH</h2><p>Khi làm việc với server, ta cần một phương thức cho phép ta kết nối với server từ máy tính của mình. SSH là một trong những phương thức đó.</p>
+<p><img src="/images/SSHkienthuccobanvaungdung/SSH.png" alt="Hình 1. Giao thức SSH"></p>
+<blockquote>
+<p>SSH là phương thức giúp chúng ta thiết lập một <strong>kết nối bảo mật tới server từ xa.</strong> </p>
+</blockquote>
+<p>Kết nối này cho phép bạn làm việc trực tiếp với shell của server. Từ đó bạn có thể làm việc với server giống như đang làm với máy của mình.</p>
+<p>Vậy là xong phần định nghĩa. Bây giờ mình xin phép điểm lại một số kiến thức cơ bản trước khi bắt đầu thực hành sử dụng công cụ này. Phần này sẽ giúp chúng ta hiểu rõ ý nghĩa của một file config hay một thông báo lỗi… từ đó biết/hiểu mình cần phải làm gì ngay cả khi copy code trên mạng.</p>
+<h2 id="Kien-thuc-nen-Ma-hoa"><a href="#Kien-thuc-nen-Ma-hoa" class="headerlink" title="Kiến thức nền : Mã hóa"></a>Kiến thức nền : Mã hóa</h2><p>Ở phần trên, chúng ta đã nhắc đến <strong>bảo mật</strong>. SSH cho phép ta thiết lập một kết nối bảo mật. Để thực hiện điều đó, SSH sử dụng các thuật toán mã hóa khác nhau. Trong phần này mình xin nhắc lại các khái niệm mã hóa, mã hóa đối xứng, mã hóa phi đối xứng.</p>
+<h3 id="Ma-hoa"><a href="#Ma-hoa" class="headerlink" title="Mã hóa"></a>Mã hóa</h3><blockquote>
+<p>Mã hóa là việc diễn đạt một thông tin theo dạng không thể hiểu được trừ khi bạn có phương tiện để giải mã.</p>
+</blockquote>
+<p>Mã hóa đảm bảo sự an toàn, bảo mật cho việc trao đổi thông tin giữa 2 bên. Các thuật toán mã hóa có thể được chia ra thành 2 lớp : mã hóa đối xứng và mã hóa phi đối xứng.</p>
+<h3 id="Ma-hoa-doi-xung"><a href="#Ma-hoa-doi-xung" class="headerlink" title="Mã hóa đối xứng"></a>Mã hóa đối xứng</h3><p>Mã hóa đối xứng là một lớp các thuật toán mã hóa mà trong đó <strong>việc mã hóa và giải mã thông tin chung một khóa</strong> (giải mã là quá trình ngược lại của mã hóa). Khóa này cần được bảo vệ.</p>
+<p>Mã hóa đối xứng giúp cho <strong>thông tin được trao đổi được giữ bí mật</strong>. Chỉ những người có khóa mới có thể giải mã thông tin. </p>
+<h3 id="Ma-hoa-phi-doi-xung"><a href="#Ma-hoa-phi-doi-xung" class="headerlink" title="Mã hóa phi đối xứng"></a>Mã hóa phi đối xứng</h3><p>Trái ngược với mã hóa đối xứng, các thuật toán mã hóa phi đối xứng <strong>sử dụng 2 khóa khác nhau để mã hóa và giải mã thông tin.</strong> Mỗi người cần có một cặp khóa. Trong đó, khóa công khai có thể công khai cho mọi người, còn  khóa bí mật thì của riêng mỗi người và không được chia sẻ cho bất cứ ai. Khi thông tin được mã hóa bằng một khóa nào đó trong cặp khóa thì chỉ có duy nhất khóa còn lại trong cùng một cặp mới có thể giải mã. </p>
+<p>Mã hóa phi đối xứng cũng cung cấp cho chúng ta khả năng bảo mật thông tin  giống như mã hóa đối xứng. Nếu bên A mã hóa tin nhắn bằng khóa công khai của bên B thì chỉ có duy nhất bên B với khóa bí mật của mình mới có thể giải mã.</p>
+<p>Ngoài ra, nó còn 2 khả năng sau mà mã hóa đối xứng không có : </p>
+<ul>
+<li>Giúp ta xác nhận ai là người gởi thông tin. (*)</li>
+<li>Người đã gởi thông tin không thể chối bỏ hành động của mình</li>
+</ul>
+<p>Đây là trường hợp khi bên A mã hóa tin nhắn bằng khóa bí mật của chính mình. Bên B dùng khóa công khai của bên A để giải mã. Nếu giải mã thành công chứng tỏ tin nhắn chỉ có thể được gởi đi từ bên A. Đồng thời, bên A cũng không thể chối bỏ rằng mình đã gởi tin nhắn này vì nếu là một ai khác gởi thì bên B không thể dùng khóa công khai của bên A để giải mã.</p>
+<p><img src="/images/SSHkienthuccobanvaungdung/AsymetricEncryptionForAuthentication-Success.png" alt="Hình 2. Trường hợp giải mã thành công"></p>
+<p><img src="/images/SSHkienthuccobanvaungdung/AsymetricEncryptionForAuthentication-Fail.png" alt="Hình 3. Trường hợp giải mã thất bại"></p>
+<p>Tính chất (*) là một cơ sở quan trọng cho SSH, vì nó giúp server <strong>xác thực</strong> ai là người đang kết nối với hệ thống. Điều này cho phép server có thể chấp nhận hoặc từ chối kết nối. Quá trình xác thực sử dụng SSH không yêu cầu mật khẩu, thay vào đó khóa bí mật sẽ được sử dụng cùng với các khóa công khai được cho phép (authorized_keys) trên server. So sánh 2 phương pháp xác thực bằng mật khẩu và bằng khóa bí mật, ta thấy rằng : </p>
+<ul>
+<li>Xác thực bằng khóa bí mật cho phép ta <strong>tự động hóa</strong> các câu lệnh vì server shell không yêu cầu nhập mật khẩu.</li>
+<li>Xác thực bằng khóa bí mật cho ta biết <strong>ai</strong> là người truy cập hệ thống. Với mật khẩu, người đăng nhập vào hệ thống chỉ là một người nào đó biết mật khẩu.</li>
+<li>Với việc không sử dụng mật khẩu, xác thực bằng khóa bí mật <strong>an toàn</strong> hơn. Mỗi người trong một nhóm có thể dùng khóa bí mật của riêng mình để đăng nhập vào hệ thống chung thay vì chia sẻ với nhau một mật khẩu.</li>
+</ul>
+<p>Đó cũng chính là những điểm mạnh của SSH. Bây giờ, chúng ta sẽ nói về việc sử dụng SSH trong thực tế.</p>
+<h2 id="Su-dung-SSH-khi-di-lam"><a href="#Su-dung-SSH-khi-di-lam" class="headerlink" title="Sử dụng SSH khi đi làm"></a>Sử dụng SSH khi đi làm</h2><h3 id="Su-dung-SSH-voi-Git-hosting-service"><a href="#Su-dung-SSH-voi-Git-hosting-service" class="headerlink" title="Sử dụng SSH với Git hosting service"></a>Sử dụng SSH với Git hosting service</h3><p>Khi làm việc với git hosting service như GitHub, chúng ta có thể clone, push, pull.. một repository sử dụng giao thức HTTPS hoặc SSH. </p>
+<ul>
+<li>Nếu sử dụng HTTPS, mỗi khi push, pull .. chúng ta cần phải nhập tài khoản và mật khẩu GitHub.</li>
+<li>Nếu sử dụng SSH, chúng ta cần phải cung cấp cho GitHub khóa công khai của mình (trong mục Settings &gt; SSH and GPG keys). Sau đó, mỗi khi push, pull… thay vì phải nhập tài khoản và mật khẩu GitHub, chúng ta chỉ cần nhập mật khẩu của khóa bí mật (passphrase), hoặc không cần phải gõ thêm gì nếu bạn không setup passphrase khi tạo khóa. GitHub sử dụng khóa công khai để xác thực xem ta là ai và có quyền đọc/ghi repository hay không và chấp nhận hoặc từ chối câu lệnh của chúng ta.</li>
+</ul>
+<p>Rõ ràng cách 2 tiện hơn vì chúng ta đỡ phải nhập dữ liệu. Trong trường hợp không có passphrase, quá trình push/pull repository có thể được hoàn thành bằng việc chạy script. Điều này cho phép ta tự động hóa việc deploy code lên server.</p>
+<h3 id="Cau-hinh-SSH"><a href="#Cau-hinh-SSH" class="headerlink" title="Cấu hình SSH"></a>Cấu hình SSH</h3><p>Để cấu hình SSH, chúng ta sẽ làm việc với thư mục .ssh. Đây là thư mục chứa các file quan trọng để sử dụng giao thức SSH : authorized_keys, known_hosts và config. Dưới đây mình xin giải thích ý nghĩa của từng file : </p>
+<ul>
+<li><p><strong>authorized_keys</strong> : trong file này chứa danh sách các khóa công khai của những người có thể truy cập vào hệ thống.<br>Khi một người kết nối tới server, tin nhắn được mã hóa bởi khóa bí mật của họ sẽ được giải mã bởi lần lượt các khóa công khai trong authorized_keys. Nếu một trong số các khóa công khai này có thể giải mã thành công thì người đó sẽ được cho phép kết nối vào server.</p>
+<p>  Vậy, nếu bạn muốn truy cập vào user <code>user</code> của server <code>server</code> sử dụng giao thức SSH, bạn chỉ cần thêm khóa công khai của mình vào file authorized_keys trong thư mục .ssh của user <code>user</code>. Điều này về mặt bản chất cũng giống như khi bạn thêm khóa công khai vào tài khoản GitHub của mình.</p>
+</li>
+<li><p><strong>known_hosts</strong> : trong file này chứa danh sách các host bạn đã truy cập. Các thông tin trong file giúp máy tính kiểm tra danh tính host mà nó đang kết nối để chắc chắn rằng nó đang kết nối tới đúng nơi, tránh việc bị kẻ xấu redirect kết nối vào máy của họ.</p>
+</li>
+<li><p><strong>config</strong> : file này chứa các thiết lập SSH. Khi chúng ta sử dụng một kết nối SSH thường xuyên, chúng ta có thể lưu các tham số của kết nối đó vào file này. Câu lệnh SSH sẽ được rút ngắn hơn.<br>Ví dụ, khi bạn lưu đoạn text dưới đây vào file ~/.ssh/config</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host alias</span><br><span class="line">    HostName hostname</span><br><span class="line">    User username</span><br><span class="line">    IdentityFile ~/.ssh/private_key</span><br></pre></td></tr></table></figure>
+<p>Thì câu lệnh <code>ssh alias</code> sẽ tương đương với <code>ssh username@hostname -i ~/.ssh/private_key</code></p>
+</li>
+</ul>
+<p>Mình sử dụng file config này khi cần phải thiết lập một tài khoản GitLab thứ 2. Các bạn có thể xem chi tiết tại <a href="https://medium.com/uncaught-exception/setting-up-multiple-gitlab-accounts-82b70e88c437">đây</a>.</p>
+<h3 id="Mot-vi-du-ve-viec-van-dung-ly-thuyet-de-giai-quyet-loi"><a href="#Mot-vi-du-ve-viec-van-dung-ly-thuyet-de-giai-quyet-loi" class="headerlink" title="Một ví dụ về việc vận dụng lý thuyết để giải quyết lỗi"></a>Một ví dụ về việc vận dụng lý thuyết để giải quyết lỗi</h3><p>Trong phần này, mình xin giới thiệu một lỗi hay gặp khi làm việc với SSH và cách giải quyết. Bạn sẽ thấy phần kiến thức cơ bản có ích cho chúng ta như thế nào.</p>
+<p>Bạn có thấy cái thông báo này quen quen không ?</p>
+<p><img src="/images/SSHkienthuccobanvaungdung/keyopen.PNG" alt="Hình 4. Khóa bí mật không được bảo vệ"></p>
+<p>Đây là lỗi hay gặp khi chúng ta copy khóa bí mật từ máy này sang máy khác sau đó sử dụng SSH ngay. Như trong phần lý thuyết mình đã đề cập, khóa bí mật là của riêng mỗi người và không được chia sẻ cho bất kỳ ai. Trong hình, khóa có permission là 644, có nghĩa là mọi người có thể đọc được nội dung của khóa, vi phạm nguyên tắc của khóa bí mật dẫn đến lỗi.</p>
+<p>Vấn đề đã rõ, ta cần giới hạn permission của khóa. Ta có thể cân nhắc giữa 400 hoặc 600. Xong !</p>
+<h2 id="Tong-ket"><a href="#Tong-ket" class="headerlink" title="Tổng kết"></a>Tổng kết</h2><p>SSH là một công cụ mà mình sử dụng khá thường xuyên trong công việc. Lúc ban đầu mình cũng lên mạng copy những đoạn lệnh về dán vào terminal để chạy nhưng mình không nắm rõ bản chất. Khi phải cấu hình những trường hợp phức tạp hơn hay gần đây làm việc với GitLab CI/CD thì mình rất lúng túng. Sau khi hệ thống lại, mình dễ dàng nhìn ra mối liên hệ chặt chẽ giữa kiến thức cơ bản và ứng dụng trong thực tế. Hiểu rõ được điều này giúp mình tự tin hơn khi làm việc. Hi vọng bài viết này có ích với bạn đọc. Hẹn gặp lại !</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
 
 
 </div>
