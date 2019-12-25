@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html  lang="en">
+<html>
 <head>
-    <meta charset="utf-8" />
+  <meta charset="utf-8">
+  
 
-<meta name="generator" content="Hexo 4.0.0" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-
-<title>SSH - Kiến thức căn bản và ứng dụng - Khoa&#39;s blog</title>
-
-
-    <meta name="description" content="Mục đích bài viếtTrong quá trình đi làm của mình, ngoài việc viết code, một hoạt động khác chiếm khá nhiều thời gian là việc đẩy code lên remote repository, hay deploy code lên server. Khi làm việc vớ">
+  
+  <title>SSH - Kiến thức căn bản và ứng dụng | Khoa&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Mục đích bài viếtTrong quá trình đi làm của mình, ngoài việc viết code, một hoạt động khác chiếm khá nhiều thời gian là việc đẩy code lên remote repository, hay deploy code lên server. Khi làm việc vớ">
 <meta name="keywords" content="SSH,CI&#x2F;CD">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSH - Kiến thức căn bản và ứng dụng">
@@ -18,151 +15,86 @@
 <meta property="og:site_name" content="Khoa&#39;s blog">
 <meta property="og:description" content="Mục đích bài viếtTrong quá trình đi làm của mình, ngoài việc viết code, một hoạt động khác chiếm khá nhiều thời gian là việc đẩy code lên remote repository, hay deploy code lên server. Khi làm việc vớ">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-25T17:48:10.644Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;SSHkienthuccobanvaungdung&#x2F;SSH.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;SSHkienthuccobanvaungdung&#x2F;AsymetricEncryptionForAuthentication-Success.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;SSHkienthuccobanvaungdung&#x2F;AsymetricEncryptionForAuthentication-Fail.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;SSHkienthuccobanvaungdung&#x2F;keyopen.PNG">
+<meta property="og:updated_time" content="2019-12-25T18:22:26.253Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-
-
-
-
-
-
-
-<link rel="icon" href="/images/favicon.svg">
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
-
-
-    
-    
-<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
-
-    
-    
-    
-    
-<link rel="stylesheet" href="/css/back-to-top.css">
-
-    
-    
-    
-    
-    
-    
-    
-    <link rel="stylesheet" href="/css/progressbar.css">
-<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
-    
-    
-    
-
-
-<link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;SSHkienthuccobanvaungdung&#x2F;SSH.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Khoa&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
 </head>
-<body class="is-3-column">
-    <nav class="navbar navbar-main">
-    <div class="container">
-        <div class="navbar-brand is-flex-center">
-            <a class="navbar-item navbar-logo" href="/">
-            
-                <img src="/images/logo.svg" alt="SSH - Kiến thức căn bản và ứng dụng" height="28">
-            
-            </a>
-        </div>
-        <div class="navbar-menu">
-            
-            <div class="navbar-start">
-                
-                <a class="navbar-item"
-                href="/">Home</a>
-                
-                <a class="navbar-item"
-                href="/archives">Archives</a>
-                
-                <a class="navbar-item"
-                href="/categories">Categories</a>
-                
-                <a class="navbar-item"
-                href="/tags">Tags</a>
-                
-                <a class="navbar-item"
-                href="/about">About</a>
-                
-            </div>
-            
-            <div class="navbar-end">
-                
-                    
-                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ddkhoa/ddkhoa.github.io">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
-                
-                
-                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
-                
-                <a class="navbar-item search" title="Search" href="javascript:;">
-                    <i class="fas fa-search"></i>
-                </a>
-                
-            </div>
-        </div>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Khoa&#39;s blog</a>
+      </h1>
+      
     </div>
-</nav>
-    
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-<div class="card">
-    
-    <div class="card-content article ">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-20T23:43:17.594Z">2019-12-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/IT/">IT</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/IT/DevOps/">DevOps</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    15 minutes read
-                </span>
-                
-                
-            </div>
-        </div>
+          <a class="main-nav-link" href="/">Home</a>
         
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                SSH - Kiến thức căn bản và ứng dụng
-            
-        </h1>
-        <div class="content">
-            <h2 id="Muc-dich-bai-viet"><a href="#Muc-dich-bai-viet" class="headerlink" title="Mục đích bài viết"></a>Mục đích bài viết</h2><p>Trong quá trình đi làm của mình, ngoài việc viết code, một hoạt động khác chiếm khá nhiều thời gian là việc đẩy code lên remote repository, hay deploy code lên server. Khi làm việc với git hay server, chúng ta không thể không nhắc tới thuật ngữ <strong>SSH</strong>. Bài viết này của mình nhằm mục đích hệ thống lại các kiến thức liên quan đến SSH, từ phần kiến thức nền tảng, tới các việc sử dụng SSH trong thực tế.</p>
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-SSHKienthuccobanvaungdung" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/21/SSHKienthuccobanvaungdung/" class="article-date">
+  <time datetime="2019-12-20T23:43:17.594Z" itemprop="datePublished">2019-12-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>►<a class="article-category-link" href="/categories/IT/DevOps/">DevOps</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SSH - Kiến thức căn bản và ứng dụng
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Muc-dich-bai-viet"><a href="#Muc-dich-bai-viet" class="headerlink" title="Mục đích bài viết"></a>Mục đích bài viết</h2><p>Trong quá trình đi làm của mình, ngoài việc viết code, một hoạt động khác chiếm khá nhiều thời gian là việc đẩy code lên remote repository, hay deploy code lên server. Khi làm việc với git hay server, chúng ta không thể không nhắc tới thuật ngữ <strong>SSH</strong>. Bài viết này của mình nhằm mục đích hệ thống lại các kiến thức liên quan đến SSH, từ phần kiến thức nền tảng, tới các việc sử dụng SSH trong thực tế.</p>
 <h2 id="Gioi-thieu-SSH"><a href="#Gioi-thieu-SSH" class="headerlink" title="Giới thiệu SSH"></a>Giới thiệu SSH</h2><p>Khi làm việc với server, ta cần một phương thức cho phép ta kết nối với server từ máy tính của mình. SSH là một trong những phương thức đó.</p>
 <p><img src="/images/SSHkienthuccobanvaungdung/SSH.png" alt="Hình 1. Giao thức SSH"></p>
 <blockquote>
@@ -212,7 +144,7 @@
 <p>Thì câu lệnh <code>ssh alias</code> sẽ tương đương với <code>ssh username@hostname -i ~/.ssh/private_key</code></p>
 </li>
 </ul>
-<p>Mình sử dụng file config này khi cần phải thiết lập một tài khoản GitLab thứ 2. Các bạn có thể xem chi tiết tại <a href="https://medium.com/uncaught-exception/setting-up-multiple-gitlab-accounts-82b70e88c437">đây</a>.</p>
+<p>Mình sử dụng file config này khi cần phải thiết lập một tài khoản GitLab thứ 2. Các bạn có thể xem chi tiết tại <a href="https://medium.com/uncaught-exception/setting-up-multiple-gitlab-accounts-82b70e88c437" target="_blank" rel="noopener">đây</a>.</p>
 <h3 id="Mot-vi-du-ve-viec-van-dung-ly-thuyet-de-giai-quyet-loi"><a href="#Mot-vi-du-ve-viec-van-dung-ly-thuyet-de-giai-quyet-loi" class="headerlink" title="Một ví dụ về việc vận dụng lý thuyết để giải quyết lỗi"></a>Một ví dụ về việc vận dụng lý thuyết để giải quyết lỗi</h3><p>Trong phần này, mình xin giới thiệu một lỗi hay gặp khi làm việc với SSH và cách giải quyết. Bạn sẽ thấy phần kiến thức cơ bản có ích cho chúng ta như thế nào.</p>
 <p>Bạn có thấy cái thông báo này quen quen không ?</p>
 <p><img src="/images/SSHkienthuccobanvaungdung/keyopen.PNG" alt="Hình 4. Khóa bí mật không được bảo vệ"></p>
@@ -220,717 +152,126 @@
 <p>Vấn đề đã rõ, ta cần giới hạn permission của khóa. Ta có thể cân nhắc giữa 400 hoặc 600. Xong !</p>
 <h2 id="Tong-ket"><a href="#Tong-ket" class="headerlink" title="Tổng kết"></a>Tổng kết</h2><p>SSH là một công cụ mà mình sử dụng khá thường xuyên trong công việc. Lúc ban đầu mình cũng lên mạng copy những đoạn lệnh về dán vào terminal để chạy nhưng mình không nắm rõ bản chất. Khi phải cấu hình những trường hợp phức tạp hơn hay gần đây làm việc với GitLab CI/CD thì mình rất lúng túng. Sau khi hệ thống lại, mình dễ dàng nhìn ra mối liên hệ chặt chẽ giữa kiến thức cơ bản và ứng dụng trong thực tế. Hiểu rõ được điều này giúp mình tự tin hơn khi làm việc. Hi vọng bài viết này có ích với bạn đọc. Hẹn gặp lại !</p>
 
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/CI-CD/" rel="tag">CI/CD</a>, <a class="has-link-grey -link" href="/tags/SSH/" rel="tag">SSH</a>
-                </div>
-            </div>
-        </div>
-        
-        
-        
-        <!-- AddToAny BEGIN -->
-<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-<!-- <a class="a2a_dd" href="https://www.addtoany.com/share"></a> -->
-<a class="a2a_button_facebook"></a>
-<a class="a2a_button_linkedin"></a>
-<a class="a2a_button_facebook_messenger"></a>
-<!-- <a class="a2a_button_twitter"></a> -->
-<!-- <a class="a2a_button_telegram"></a> -->
-<!-- <a class="a2a_button_whatsapp"></a> -->
-<!-- <a class="a2a_button_reddit"></a> -->
-</div>
-<script async src="https://static.addtoany.com/menu/page.js"></script>
-<!-- AddToAny END -->
-
-        
+      
     </div>
-</div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/21/SSHKienthuccobanvaungdung/" data-id="ck4llw8yt0001pcuq6xva45sz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CI-CD/" rel="tag">CI/CD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li></ul>
 
-
-
-
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/03/2namnodejs/">
-                <span class="level-item">Tóm tắt 2 năm sử dụng NodeJS</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
-
-
-
-<div class="card">
-    <div class="card-content">
-        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
-        <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en/sdk.js#xfbml=1&version=v2.8";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<div class="fb-comments" data-width="100%" data-href="http://yoursite.com/2019/12/21/SSHKienthuccobanvaungdung/" data-num-posts="5"></div>
-
-    </div>
-</div>
-</div>
-                
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    </footer>
+  </div>
+  
     
-        
-<div class="card widget">
-    <div class="card-content">
-        <nav class="level">
-            <div class="level-item has-text-centered" style="flex-shrink: 1">
-                <div>
-                    
-                    <figure class="image is-128x128 has-mb-6">
-                        <img class="" src="/images/avatar.png" alt="Đinh Đăng Khoa">
-                    </figure>
-                    
-                    <p class="is-size-4 is-block">
-                        Đinh Đăng Khoa
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-block">
-                        IT Engineer
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
-                        <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Marseille, France</span>
-                    </p>
-                    
-                </div>
-            </div>
-        </nav>
-        <nav class="level is-mobile">
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        Posts
-                    </p>
-                    <a href="/archives">
-                        <p class="title has-text-weight-normal">
-                            2
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        Categories
-                    </p>
-                    <a href="/categories">
-                        <p class="title has-text-weight-normal">
-                            3
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        Tags
-                    </p>
-                    <a href="/tags">
-                        <p class="title has-text-weight-normal">
-                            3
-                        </p>
-                    </a>
-                </div>
-            </div>
-        </nav>
-        
-        <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/ddkhoa" target="_blank" rel="noopener">
-                Follow</a>
-        </div>
-        
-        
-        
-        <div class="level is-mobile">
-            
-            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
-                title="Github" href="https://github.com/ddkhoa">
-                
-                <i class="fab fa-github"></i>
-                
-            </a>
-            
-        </div>
-        
-    </div>
-</div>
-    
-        
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/03/2namnodejs/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Tóm tắt 2 năm sử dụng NodeJS</div>
+    </a>
+  
+</nav>
 
-    <div class="card widget" id="toc">
-        <div class="card-content">
-            <div class="menu">
-                <h3 class="menu-label">
-                    Catalogue
-                </h3>
-                <ul class="menu-list"><li>
-        <a class="is-flex" href="#Muc-dich-bai-viet">
-        <span class="has-mr-6">1</span>
-        <span>Mục đích bài viết</span>
-        </a></li><li>
-        <a class="is-flex" href="#Gioi-thieu-SSH">
-        <span class="has-mr-6">2</span>
-        <span>Giới thiệu SSH</span>
-        </a></li><li>
-        <a class="is-flex" href="#Kien-thuc-nen-Ma-hoa">
-        <span class="has-mr-6">3</span>
-        <span>Kiến thức nền : Mã hóa</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#Ma-hoa">
-        <span class="has-mr-6">3.1</span>
-        <span>Mã hóa</span>
-        </a></li><li>
-        <a class="is-flex" href="#Ma-hoa-doi-xung">
-        <span class="has-mr-6">3.2</span>
-        <span>Mã hóa đối xứng</span>
-        </a></li><li>
-        <a class="is-flex" href="#Ma-hoa-phi-doi-xung">
-        <span class="has-mr-6">3.3</span>
-        <span>Mã hóa phi đối xứng</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#Su-dung-SSH-khi-di-lam">
-        <span class="has-mr-6">4</span>
-        <span>Sử dụng SSH khi đi làm</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#Su-dung-SSH-voi-Git-hosting-service">
-        <span class="has-mr-6">4.1</span>
-        <span>Sử dụng SSH với Git hosting service</span>
-        </a></li><li>
-        <a class="is-flex" href="#Cau-hinh-SSH">
-        <span class="has-mr-6">4.2</span>
-        <span>Cấu hình SSH</span>
-        </a></li><li>
-        <a class="is-flex" href="#Mot-vi-du-ve-viec-van-dung-ly-thuyet-de-giai-quyet-loi">
-        <span class="has-mr-6">4.3</span>
-        <span>Một ví dụ về việc vận dụng lý thuyết để giải quyết lỗi</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#Tong-ket">
-        <span class="has-mr-6">5</span>
-        <span>Tổng kết</span>
-        </a></li></ul>
-            </div>
-        </div>
-    </div>
+  
+</article>
 
+</section>
+        
+          <aside id="sidebar">
+  
     
-    
-        <div class="column-right-shadow is-hidden-widescreen ">
-        
-            
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                Categories
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/IT/">
-            <span class="level-start">
-                <span class="level-item">IT</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/IT/Backend/">
-            <span class="level-start">
-                <span class="level-item">Backend</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/IT/DevOps/">
-            <span class="level-start">
-                <span class="level-item">DevOps</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li></ul></li>
-            </ul>
-        </div>
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT/">IT</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/IT/Backend/">Backend</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IT/DevOps/">DevOps</a></li></ul></li></ul>
     </div>
-</div>
-        
-            <div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            Recent
-        </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/12/21/SSHKienthuccobanvaungdung/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SSH - Kiến thức căn bản và ứng dụng">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-20T23:43:17.594Z">2019-12-21</time></div>
-                    <a href="/2019/12/21/SSHKienthuccobanvaungdung/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SSH - Kiến thức căn bản và ứng dụng</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/IT/">IT</a> / <a class="has-link-grey -link" href="/categories/IT/DevOps/">DevOps</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/11/03/2namnodejs/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Tóm tắt 2 năm sử dụng NodeJS">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-03T10:35:01.716Z">2019-11-03</time></div>
-                    <a href="/2019/11/03/2namnodejs/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Tóm tắt 2 năm sử dụng NodeJS</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/IT/">IT</a> / <a class="has-link-grey -link" href="/categories/IT/Backend/">Backend</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-    </div>
-</div>
-        
-            <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            Archives
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-        
-            <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                Tags
-            </h3>
-            <div class="field is-grouped is-grouped-multiline">
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CI-CD/">
-                        <span class="tag">CI/CD</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/NodeJS/">
-                        <span class="tag">NodeJS</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/SSH/">
-                        <span class="tag">SSH</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-        
-        </div>
-    
-</div>
-
-                
+  </div>
 
 
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI-CD/" rel="tag">CI/CD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NodeJS/" rel="tag">NodeJS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li></ul>
+    </div>
+  </div>
 
 
-<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+  
     
-        
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                Categories
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/IT/">
-            <span class="level-start">
-                <span class="level-item">IT</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/IT/Backend/">
-            <span class="level-start">
-                <span class="level-item">Backend</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/IT/DevOps/">
-            <span class="level-start">
-                <span class="level-item">DevOps</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li></ul></li>
-            </ul>
-        </div>
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a>
     </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            Recent
-        </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/12/21/SSHKienthuccobanvaungdung/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SSH - Kiến thức căn bản và ứng dụng">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-20T23:43:17.594Z">2019-12-21</time></div>
-                    <a href="/2019/12/21/SSHKienthuccobanvaungdung/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SSH - Kiến thức căn bản và ứng dụng</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/IT/">IT</a> / <a class="has-link-grey -link" href="/categories/IT/DevOps/">DevOps</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/11/03/2namnodejs/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Tóm tắt 2 năm sử dụng NodeJS">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-03T10:35:01.716Z">2019-11-03</time></div>
-                    <a href="/2019/11/03/2namnodejs/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Tóm tắt 2 năm sử dụng NodeJS</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/IT/">IT</a> / <a class="has-link-grey -link" href="/categories/IT/Backend/">Backend</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            Archives
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                Tags
-            </h3>
-            <div class="field is-grouped is-grouped-multiline">
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CI-CD/">
-                        <span class="tag">CI/CD</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/NodeJS/">
-                        <span class="tag">NodeJS</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/SSH/">
-                        <span class="tag">SSH</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-    
-    
-</div>
+  </div>
 
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-    <div class="container">
-        <div class="level">
-            <div class="level-start has-text-centered-mobile">
-                <a class="footer-logo is-block has-mb-6" href="/">
-                
-                    <img src="/images/logo.svg" alt="SSH - Kiến thức căn bản và ứng dụng" height="28">
-                
-                </a>
-                <p class="is-size-7">
-                &copy; 2019 DINH Dang Khoa&nbsp;
-                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
-                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
-                
-                </p>
-            </div>
-            <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ddkhoa/ddkhoa.github.io">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
-            
-            </div>
-        </div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
     </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/21/SSHKienthuccobanvaungdung/">SSH - Kiến thức căn bản và ứng dụng</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/03/2namnodejs/">Tóm tắt 2 năm sử dụng NodeJS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 DINH Dang Khoa<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
 </footer>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
-<script>moment.locale("en");</script>
-
-
-<script>
-var IcarusThemeSettings = {
-    site: {
-        url: 'http://yoursite.com',
-        external_link: {"enable":true,"exclude":[]}
-    },
-    article: {
-        highlight: {
-            clipboard: true,
-            fold: 'unfolded'
-        }
-    }
-};
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
-
-
-
-
-
-<script src="/js/animation.js"></script>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
-<script src="/js/gallery.js" defer></script>
-
-
-
-<div id="outdated">
-    <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
-            my browser now </a></p>
-    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        outdatedBrowser({
-            bgColor: '#f25648',
-            color: '#ffffff',
-            lowerThan: 'flex'
-        });
-    });
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    MathJax.Hub.Config({
-        'HTML-CSS': {
-            matchFontHeight: false
-        },
-        SVG: {
-            matchFontHeight: false
-        },
-        CommonHTML: {
-            matchFontHeight: false
-        },
-        tex2jax: {
-            inlineMath: [
-                ['$','$'],
-                ['\\(','\\)']
-            ]
-        }
-    });
-});
-</script>
-
-
-<a id="back-to-top" title="Back to Top" href="javascript:;">
-    <i class="fas fa-chevron-up"></i>
-</a>
-<script src="/js/back-to-top.js" defer></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="/js/main.js" defer></script>
-
-    
-    <div class="searchbox ins-search">
-    <div class="searchbox-container ins-search-container">
-        <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
-            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="searchbox-result-wrapper ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
     </div>
-</div>
-<script>
-    (function (window) {
-        var INSIGHT_CONFIG = {
-            TRANSLATION: {
-                POSTS: 'Posts',
-                PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
-                UNTITLED: '(Untitled)',
-            },
-            CONTENT_URL: '/content.json',
-        };
-        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-    })(window);
-</script>
-<script src="/js/insight.js" defer></script>
-<link rel="stylesheet" href="/css/search.css">
-<link rel="stylesheet" href="/css/insight.css">
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
     
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
 </body>
 </html>
