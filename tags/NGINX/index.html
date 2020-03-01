@@ -170,94 +170,16 @@
             <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>Download XAMPP/WAMPP to my computer and I have a server already configured. These applications abstract all the details behind.</p>
 <p>Copy/paste commands from the Internet to configure/optimize a NGINX server is frustrating without any server knowledge. </p>
 <p>Let’s cover the base.</p>
-<h1 id="Basic-knowledge"><a href="#Basic-knowledge" class="headerlink" title="Basic knowledge"></a>Basic knowledge</h1><h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><ul>
-<li>A scripting language server-side used to build web applications.</li>
-<li>PHP code can be embedded into the HTML page.</li>
-<li>When a PHP file is requested, the PHP code is executed then the webserver sends the result (HTML page) to clients.</li>
-</ul>
-<p><strong>Question</strong> : Who execute PHP code ?</p>
-<ul>
-<li>PHP software process the PHP code. Not the webserver.</li>
-<li>PHP and webserver work closely, but they are different.</li>
-</ul>
-<p>Generally, when receiving a request involve the web app, the webserver will tell the application to execute. The server then receives the result from the app and sends it back to the web browser.</p>
-<p>We have this stack :<br>Webserver -&gt; Interface -&gt; Application</p>
-<p>Each element in the stack has many implementations : </p>
-<ul>
-<li>For webserver, we have NGINX, Apache, IIS,…</li>
-<li>For interface, we have CGI, FastCGI, SuPHP, DSO,…</li>
-<li>For application, we can write in many different languages such as PHP, Perl, C/C++, Python, Java,…</li>
-</ul>
-<p>So an Apache or a NGINX server doesn’t necessarily run web apps written in PHP.</p>
-<p>In 2020, when installing a new server, a popular combination is NGINX-FastCGI-PHP.</p>
-<h2 id="NGINX"><a href="#NGINX" class="headerlink" title="NGINX"></a>NGINX</h2><p>In addition to being a traditional HTTP server, NGINX can be used as a reverse proxy server or an email server. NGINX is known for its high performance, especially when serving static files.</p>
-<h2 id="FastCGI"><a href="#FastCGI" class="headerlink" title="FastCGI"></a>FastCGI</h2><p>It’s a protocol allow the web server and the web application to communicate together. FastCGI tackles the problem of per-request process creation and termination in the former CGI by using persistent processes to handle many requests.</p>
-<p>With these elements, we can now set up a NGINX server.</p>
-<h1 id="Setup-a-NGINX-server"><a href="#Setup-a-NGINX-server" class="headerlink" title="Setup a NGINX server"></a>Setup a NGINX server</h1><p>There are a lot of tutorials about how to setup/config an NGINX server. They contain a series of commands that we can copy/paste to the terminal. Sometimes it works, sometimes we encounter an error we don’t understand why. That’s the problem. In my case, instead of displaying the page, the browser downloads the file index.php.</p>
-<p>In my opinion, an installation tutorial should introduce the system being installed: the components, the relation between them… before showing the commands.</p>
-<p>We covered the introduction in the previous part. Let’s set up the components of a NGINX server one by one. </p>
-<h2 id="1-Install-NGINX"><a href="#1-Install-NGINX" class="headerlink" title="1. Install NGINX"></a>1. Install NGINX</h2><p>These 2 commands below will install NGINX : </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt upgrade</span><br><span class="line">sudo apt install nginx</span><br></pre></td></tr></table></figure>
-
-<p>Bonus 1: To verify the NGINX server status : </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service nginx status</span><br></pre></td></tr></table></figure>
-<p>Bonus 2: You can config NGINX to run on boot,…</p>
-<h2 id="2-Install-FastCGI"><a href="#2-Install-FastCGI" class="headerlink" title="2. Install FastCGI"></a>2. Install FastCGI</h2><p>This step is optional. If your website is static, then you don’t need the FastCGI. FastCGI processes the PHP files and sends the result to NGINX which will send the HTTP response to the browser.</p>
-<p>Install PHP FastCGI Process Manager</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install php-fpm</span><br></pre></td></tr></table></figure>
-
-<p>Run the FastCGI server</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service php-fpm start</span><br></pre></td></tr></table></figure>
-
-<p>All the components are installed, we need 1 more step: configuration.</p>
-<p>The folder <code>/etc/nginx</code> contains all the configuration of the NGINX server. We focus on : </p>
-<ul>
-<li>nginx.conf: The global config of NGINX</li>
-<li>fastcgi_params.conf: The config of FastCGI</li>
-<li>sites-available:  Each file in this folder contain the configuration of 1 site.</li>
-</ul>
-<h3 id="sites-available-yourdomainname-com"><a href="#sites-available-yourdomainname-com" class="headerlink" title="sites-available/yourdomainname.com"></a>sites-available/yourdomainname.com</h3><p>Below is a basic configuration for a site written in PHP.</p>
-<pre>
-server {
-
-    # The server will run on port 80
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    # The server name
-    server_name yourdomainname.com; 
-
-    # The directory where the server looks up files to serve
-    root /var/www/html;
-    index index.html index.htm;
-
-    # The log file
-    access_log   logs/yourdomainname_access.log;
-    error_log    logs/yourdomainname_error.log;
-
-    location / {
-        try_files $uri $uri/ =404;
-    }
-
-    # Process the PHP file
-    # we pass the PHP requests to the fastcgi at  <b>unix:/var/run/php/php7.0-fpm.sock</b>
-
-   location ~ \.php$ {
-        try_files $uri =404;
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        include fastcgi_params;
-    }
- }
-</pre>
-
-<p>Start the php-fpm and nginx process. The server can process the PHP files. The stack : NGINX -&gt; Interface -&gt; Application is alive ! You can improve each component separately: using Gzip, pagespeed module in NGINX, use cache in FastCGI server or write better PHP code…</p>
-<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>Understand the architecture of what is going to be installed is important. If not, copy/paste the code from the Internet can give an unexpected result simply because it doesn’t fulfill your needs.</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/02/29/understandaphpserver/#more">Read More</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
