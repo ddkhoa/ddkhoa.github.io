@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.css"],"names":[],"mappings":"AAAA,UACI,cAAe,CACf,KAAM,CACN,SAAU,CACV,SACJ","file":"main.c35356d6.chunk.css","sourcesContent":[".fixImage {\r\n    position: fixed;\r\n    top: 0;\r\n    right: 20%;\r\n    width: 15%;\r\n}"]}
