@@ -414,7 +414,7 @@ __webpack_require__.r(__webpack_exports__);
 class WeatherDataService {
     constructor(http) {
         this.http = http;
-        this.api = "http://api.openweathermap.org";
+        this.api = "https://api.openweathermap.org";
         this.api_key = "4bbc30dbefd23ea4a35f5df052114158";
         this.city_id_mapping = {
             'marseille': '6447142'
