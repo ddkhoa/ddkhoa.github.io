@@ -77,20 +77,20 @@ function CovidDataComponent_div_3_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](9, "number");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "blockquote");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](11, " S\u1ED1 li\u1EC7u \u0111\u01B0\u1EE3c c\u1EADp nh\u1EADt m\u1ED7i ng\u00E0y l\u00FAc 2h s\u00E1ng gi\u1EDD Vi\u1EC7t Nam. Ngu\u1ED3n ");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "a", 6);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](13, "t\u1EA1i \u0111\u00E2y");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](12, "date");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("T\u1ED5ng s\u1ED1 ca nhi\u1EC5m : ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind3"](3, 3, ctx_r1.liveData.total_cases, "", "fr-FR"), "");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("T\u1ED5ng s\u1ED1 ca nhi\u1EC5m : ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind3"](3, 4, ctx_r1.data.total_cases, "", "fr-FR"), "");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("S\u1ED1 ca m\u1EDBi h\u00F4m nay : ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind3"](6, 7, ctx_r1.newConfirmCaseNb, "", "fr-FR"), " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("S\u1ED1 ca m\u1EDBi h\u00F4m nay : ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind3"](6, 8, ctx_r1.data.new_cases, "", "fr-FR"), " ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("S\u1ED1 ca n\u1EB7ng : ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind3"](9, 11, ctx_r1.liveData.critical, "", "fr-FR"), " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("S\u1ED1 ca n\u1EB7ng : ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind3"](9, 12, ctx_r1.data.critical, "", "fr-FR"), " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" S\u1ED1 li\u1EC7u \u0111\u01B0\u1EE3c c\u1EADp nh\u1EADt v\u00E0o l\u00FAc ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](12, 16, ctx_r1.data.date, "shortTime"), " ");
 } }
 class CovidDataComponent {
     constructor(covidDataSerivce, decimalPipe) {
@@ -98,43 +98,25 @@ class CovidDataComponent {
         this.loaded = false;
     }
     ngOnInit() {
-        let today = new Date();
-        let yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
-        let before_yesterday = new Date();
-        before_yesterday.setDate(before_yesterday.getDate() - 2);
-        if (today.getHours() < 21) {
-            console.log('Today data not available');
-            today = yesterday;
-            yesterday = before_yesterday;
-        }
-        this.covidDataSerivce.getDataByDate(today).subscribe(todayData => {
-            this.covidDataSerivce.getDataByDate(yesterday).subscribe(yesterdayData => {
-                this.liveData = todayData.find(item => item.code == "FRA");
-                this.yesterdayData = yesterdayData.find(item => item.code == "FRA");
-                this.newConfirmCaseNb = this.liveData.total_cases - this.yesterdayData.total_cases;
-                this.newCriticalCaseNb = this.liveData.critical - this.yesterdayData.critical;
-                this.marseilleLiveData = todayData.find(item => item.code == "DEP-13");
-                this.marseilleYesterdayData = yesterdayData.find(item => item.code == "DEP-13");
-                this.marseilleNewCriticalCase = this.marseilleLiveData.critical - this.marseilleYesterdayData.critical;
-                this.loaded = true;
-            });
+        this.covidDataSerivce.getLiveData().subscribe(data => {
+            this.data = data;
+            this.loaded = true;
         });
     }
 }
 CovidDataComponent.ɵfac = function CovidDataComponent_Factory(t) { return new (t || CovidDataComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_covid_data_services__WEBPACK_IMPORTED_MODULE_1__["CovidDataService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_common__WEBPACK_IMPORTED_MODULE_2__["DecimalPipe"])); };
-CovidDataComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CovidDataComponent, selectors: [["app-covid-data"]], decls: 4, vars: 2, consts: [["style", "font-size: 1.2rem; text-align: center;", 4, "ngIf"], ["class", "box", 4, "ngIf"], [2, "font-size", "1.2rem", "text-align", "center"], [1, "box"], [1, "stat-nb", "stat-nb-orange"], [1, "stat-nb", "stat-nb-red"], ["href", "https://www.data.gouv.fr/fr/reuses/coronavirusapi-france/"]], template: function CovidDataComponent_Template(rf, ctx) { if (rf & 1) {
+CovidDataComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CovidDataComponent, selectors: [["app-covid-data"]], decls: 4, vars: 2, consts: [["style", "font-size: 1.2rem; text-align: center;", 4, "ngIf"], ["class", "box", 4, "ngIf"], [2, "font-size", "1.2rem", "text-align", "center"], [1, "box"], [1, "stat-nb", "stat-nb-orange"], [1, "stat-nb", "stat-nb-red"]], template: function CovidDataComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h1");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Corona virus");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, CovidDataComponent_div_2_Template, 2, 0, "div", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, CovidDataComponent_div_3_Template, 14, 15, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, CovidDataComponent_div_3_Template, 13, 19, "div", 1);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.loaded);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.loaded);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["NgIf"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["DecimalPipe"]], styles: [".stat-nb[_ngcontent-%COMP%] {\r\n  font-size: 1.5rem;\r\n  font-weight: 700;\r\n}\r\n\r\n.stat-nb-red[_ngcontent-%COMP%] {\r\n  color: rgb(209, 51, 91);\r\n}\r\n\r\n.stat-nb-orange[_ngcontent-%COMP%] {\r\n  color: rgb(255, 153, 71);\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9jb3ZpZC1kYXRhL2NvdmlkLWRhdGEuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGlCQUFpQjtFQUNqQixnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSx1QkFBdUI7QUFDekI7O0FBRUE7RUFDRSx3QkFBd0I7QUFDMUIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2NvdmlkLWRhdGEvY292aWQtZGF0YS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnN0YXQtbmIge1xyXG4gIGZvbnQtc2l6ZTogMS41cmVtO1xyXG4gIGZvbnQtd2VpZ2h0OiA3MDA7XHJcbn1cclxuXHJcbi5zdGF0LW5iLXJlZCB7XHJcbiAgY29sb3I6IHJnYigyMDksIDUxLCA5MSk7XHJcbn1cclxuXHJcbi5zdGF0LW5iLW9yYW5nZSB7XHJcbiAgY29sb3I6IHJnYigyNTUsIDE1MywgNzEpO1xyXG59XHJcbiJdfQ== */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["NgIf"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["DecimalPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"]], styles: [".stat-nb[_ngcontent-%COMP%] {\r\n  font-size: 1.5rem;\r\n  font-weight: 700;\r\n}\r\n\r\n.stat-nb-red[_ngcontent-%COMP%] {\r\n  color: rgb(209, 51, 91);\r\n}\r\n\r\n.stat-nb-orange[_ngcontent-%COMP%] {\r\n  color: rgb(255, 153, 71);\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9jb3ZpZC1kYXRhL2NvdmlkLWRhdGEuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGlCQUFpQjtFQUNqQixnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSx1QkFBdUI7QUFDekI7O0FBRUE7RUFDRSx3QkFBd0I7QUFDMUIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2NvdmlkLWRhdGEvY292aWQtZGF0YS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnN0YXQtbmIge1xyXG4gIGZvbnQtc2l6ZTogMS41cmVtO1xyXG4gIGZvbnQtd2VpZ2h0OiA3MDA7XHJcbn1cclxuXHJcbi5zdGF0LW5iLXJlZCB7XHJcbiAgY29sb3I6IHJnYigyMDksIDUxLCA5MSk7XHJcbn1cclxuXHJcbi5zdGF0LW5iLW9yYW5nZSB7XHJcbiAgY29sb3I6IHJnYigyNTUsIDE1MywgNzEpO1xyXG59XHJcbiJdfQ== */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](CovidDataComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -325,9 +307,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CovidDataService", function() { return CovidDataService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
-
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
 
 
 
@@ -335,77 +315,36 @@ __webpack_require__.r(__webpack_exports__);
 class CovidDataService {
     constructor(http) {
         this.http = http;
-        this.api = "https://coronavirusapi-france.now.sh";
+        this.api = "https://corona.lmao.ninja/v2/countries/france?yesterday=true&strict=true&query=/";
     }
     ;
     getLiveData() {
-        const url = `${this.api}/FranceLiveGlobalData`;
+        const url = `${this.api}`;
         return this.http.get(url)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])((res) => {
-            const liveData = res.FranceGlobalLiveData[0];
+            const liveData = res;
             const result = {
-                code: liveData.code,
-                name: liveData.nom,
-                date: new Date(liveData.date),
-                total_cases: liveData.casConfirmes,
-                hospitalized: liveData.hospitalises,
-                critical: liveData.reanimation,
-                death: liveData.deces,
-                recover: liveData.gueris,
-                source: liveData.source.nom,
-            };
-            return result;
-        }));
-    }
-    getDataByDate(date) {
-        const pipe = new _angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"]('en-US');
-        const date_params = pipe.transform(date, 'yyyy-MM-dd');
-        const url = `${this.api}/AllDataByDate?date=${date_params}`;
-        return this.http.get(url)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])((res) => {
-            const allData = res.allFranceDataByDate;
-            const result = allData.map(item => ({
-                code: item.code,
-                name: item.nom,
-                date: new Date(item.date),
-                total_cases: item.casConfirmes,
-                hospitalized: item.hospitalises,
-                critical: item.reanimation,
-                death: item.deces,
-                recover: item.gueris,
-                source: item.source.nom,
-            }));
-            return result;
-        }));
-    }
-    getLiveDataByDepartement(department) {
-        const url = `${this.api}/LiveDataByDepartement?Departement=${department}`;
-        return this.http.get(url)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])((res) => {
-            const liveData = res.LiveDataByDepartement[0];
-            const result = {
-                code: liveData.code,
-                name: liveData.nom,
-                date: new Date(liveData.date),
-                total_cases: liveData.casConfirmes,
-                hospitalized: liveData.hospitalises,
-                critical: liveData.reanimation,
-                death: liveData.deces,
-                recover: liveData.gueris,
-                source: liveData.source.nom,
+                code: liveData.countryInfo.iso2,
+                name: liveData.country,
+                date: new Date(liveData.updated),
+                total_cases: liveData.cases,
+                new_cases: liveData.todayCases,
+                recover: liveData.recovered,
+                death: liveData.deaths,
+                critical: liveData.critical
             };
             return result;
         }));
     }
 }
-CovidDataService.ɵfac = function CovidDataService_Factory(t) { return new (t || CovidDataService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"])); };
+CovidDataService.ɵfac = function CovidDataService_Factory(t) { return new (t || CovidDataService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"])); };
 CovidDataService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: CovidDataService, factory: CovidDataService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](CovidDataService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
                 providedIn: 'root',
             }]
-    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }]; }, null); })();
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }]; }, null); })();
 
 
 /***/ }),
