@@ -315,7 +315,7 @@ __webpack_require__.r(__webpack_exports__);
 class CovidDataService {
     constructor(http) {
         this.http = http;
-        this.api = "https://corona.lmao.ninja/v2/countries/france?yesterday=true&strict=true&query=/";
+        this.api = "https://corona.lmao.ninja/v2/countries/france?yesterday=false&strict=true&query=/";
     }
     ;
     getLiveData() {
