@@ -163,7 +163,7 @@ class AppComponent {
     }
 }
 AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(); };
-AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 23, vars: 5, consts: [[1, "clock"], [1, "content"], [1, "news", 2, "font-size", "1.2rem"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
+AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 7, vars: 5, consts: [[1, "clock"], [1, "content"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](2, "date");
@@ -171,36 +171,11 @@ AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCompo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "app-covid-data");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "app-weather-data");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "h1");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7, "Tin t\u1EE9c");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "h2");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, "28/10/2020");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "p");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "T\u1ED5ng th\u1ED1ng Ph\u00E1p th\u00F4ng b\u00E1o \u0111\u1EA5t n\u01B0\u1EDBc b\u01B0\u1EDBc v\u00E0o \u0111\u1EE3t phong t\u1ECFa th\u1EE9 2.");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "p");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, "Th\u1EDDi gian : B\u1EAFt \u0111\u1EA7u t\u1EEB 0h00 30/10/2020 t\u1EDBi ng\u00E0y 01/12/2020.");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "ul");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "li");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](17, "L\u00E0m vi\u1EC7c t\u1EEB xa khi c\u00F3 th\u1EC3, tr\u1EEB tr\u01B0\u1EDDng h\u1EE3p b\u1EAFt kh\u1EA3 kh\u00E1ng.");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "li");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19, "C\u00E1c c\u1EEDa h\u00E0ng, d\u1ECBch v\u1EE5 thi\u1EBFt y\u1EBFu v\u1EABn m\u1EDF c\u1EEDa");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "li");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](21, "So v\u1EDBi l\u1EA7n phong t\u1ECFa th\u00E1ng 3, c\u00E1c bi\u1EC7n ph\u00E1p trong \u0111\u1EE3t phong t\u1ECFa n\u00E0y \u0111\u01B0\u1EE3c n\u1EDBi l\u1ECFng h\u01A1n. Theo quan s\u00E1t, \u0111\u01B0\u1EDDng ph\u1ED1 ch\u1EC9 h\u01A1i v\u1EAFng \u0111i m\u1ED9t ch\u00FAt, kh\u00F4ng v\u1EAFng tanh nh\u01B0 \u0111\u1EE3t 1.");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](22, "router-outlet");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "router-outlet");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" Gi\u1EDD n\u01B0\u1EDBc Ph\u00E1p : ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind3"](2, 1, ctx.current_time, "dd/MM/yyyy, h:mm:ss a", "+0100"), "\n");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" Gi\u1EDD n\u01B0\u1EDBc Ph\u00E1p : ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind3"](2, 1, ctx.current_time, "dd/MM/yyyy, h:mm:ss a", "+0200"), "\n");
     } }, directives: [_components_covid_data_covid_data_component__WEBPACK_IMPORTED_MODULE_1__["CovidDataComponent"], _components_weather_data_weather_data_component__WEBPACK_IMPORTED_MODULE_2__["WeatherDataComponent"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterOutlet"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"]], styles: [".clock[_ngcontent-%COMP%] {\r\n  text-align: right;\r\n  font-size: 1.2rem;\r\n  margin-right: 15vw;\r\n}\r\n.content[_ngcontent-%COMP%] {\r\n  width: 80%;\r\n  margin: auto;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxpQkFBaUI7RUFDakIsaUJBQWlCO0VBQ2pCLGtCQUFrQjtBQUNwQjtBQUNBO0VBQ0UsVUFBVTtFQUNWLFlBQVk7QUFDZCIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNsb2NrIHtcclxuICB0ZXh0LWFsaWduOiByaWdodDtcclxuICBmb250LXNpemU6IDEuMnJlbTtcclxuICBtYXJnaW4tcmlnaHQ6IDE1dnc7XHJcbn1cclxuLmNvbnRlbnQge1xyXG4gIHdpZHRoOiA4MCU7XHJcbiAgbWFyZ2luOiBhdXRvO1xyXG59XHJcbiJdfQ== */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](AppComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
@@ -413,7 +388,7 @@ class WeatherDataService {
     }
     degToCompass(deg) {
         const val = Math.floor((deg / 22.5) + 0.5);
-        const arr = ["N", "NEN", "NE", "EEN", "E", "EES", "ES", "SES", "S", "SWS", "WS", "WWS", "W", "WWN", "WN", "NWN"];
+        const arr = ["N", "NEN", "EN", "EEN", "E", "EES", "ES", "SES", "S", "SWS", "WS", "WWS", "W", "WWN", "WN", "NWN"];
         const compass = arr[(val % 16)];
         return compass.split("").map((c) => this.direction_traduction[c]).join(" ");
     }
